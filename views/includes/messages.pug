@@ -1,5 +1,5 @@
 main 
   each message in messages
-    article.message(style='background-color: #{message.messageColorHex};')
+    article.message(style=`background-color: ${message.messageColorHex}`)
       p #{message.messageContent}
 

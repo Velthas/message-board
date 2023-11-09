@@ -1,3 +1,26 @@
+html {
+  font-size: 10px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html *,
+body * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* ### Nav Styling ### */
+header {
+  background-color: whitesmoke;
+  height: 10vh;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -29,4 +52,101 @@ li a {
 
 li a:hover {
   color: darkslategray;
+}
+
+/* ### Main ### */
+main {
+  background-color: #f5f5f5;
+  height: 80vh;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+
+  overflow: scroll;
+}
+
+/* ### Post Its ### */
+article.message {
+  transition: all 0.5s;
+
+  height: 25rem;
+  width: 25rem;
+
+  position: relative;
+
+  color: white;
+  font-weight: 500;
+  font-size: 2.3rem;
+
+  padding: 1.6rem;
+  cursor: pointer;
+}
+
+article.message:hover {
+  margin-top: -1.6rem;
+}
+
+article p {
+  max-height: 100%;
+  overflow: scroll;
+}
+
+article.message:nth-child(even) {
+  transform: rotate(15deg);
+}
+
+article.message:nth-child(even)::after {
+  position: absolute;
+  content: "";
+
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%) rotate(5deg);
+
+  opacity: 0.8;
+
+  height: 4rem;
+  aspect-ratio: 3 / 1;
+
+  background-color: crimson;
+}
+
+article.message:nth-child(odd) {
+  transform: rotate(-9deg);
+}
+
+article.message:nth-child(odd)::after {
+  position: absolute;
+  content: "";
+
+  top: 0;
+  right: -12%;
+  transform: rotate(45deg);
+
+  opacity: 0.8;
+
+  height: 2.5rem;
+  aspect-ratio: 4 / 1;
+
+  background-color: crimson;
+}
+
+article.message:nth-child(odd)::before {
+  position: absolute;
+  content: "";
+
+  top: 0;
+  left: -12%;
+  transform: rotate(315deg);
+
+  opacity: 0.8;
+
+  height: 2.5rem;
+  aspect-ratio: 4 / 1;
+
+  background-color: crimson;
 }
