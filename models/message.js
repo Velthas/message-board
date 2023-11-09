@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
-  messageContent: String,
-  messageDate: Date,
-  messageColorHex: String,
+  messageContent: { type: String, required: true },
+  messageDate: { type: Date, required: true },
+  messageColorHex: { type: String, required: true },
 });
 
 const Messages = mongoose.model("messages", messageSchema);

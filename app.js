@@ -2,11 +2,12 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
+
 const { Messages } = require("./models/message");
 
 // Mongo Setup
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb://localhost:27017/message_board";
+const mongoDB = process.env.DATABASE_URL;
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
