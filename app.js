@@ -2,11 +2,12 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const pug = require("pug");
 
 const { Messages } = require("./models/message");
 
 // Mongo Setup
-mongoose.set("strictQuery", false);
 const mongoDB = process.env.DATABASE_URL;
 main().catch((err) => console.log(err));
 async function main() {
@@ -14,16 +15,15 @@ async function main() {
 }
 
 const app = express();
+app.set("view engine", "pug"); // Configures express to expect pug templates
 
 // Makes public folder available
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-  // const message = new Messages({ messageContent: "awesome" });
-  // const message = Messages.create({ messageContent: "awesome" })
-  // console.log(message);
-  // message.save();
+app.get("/", async (req, res) => {
+  const messages = await Messages.find();
+  const compiledPugTemplate = pug.renderFile("./views/index.pug", { messages });
+  res.send(compiledPugTemplate);
 });
 
 app.listen(process.env.PORT);

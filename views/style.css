@@ -1,0 +1,32 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+
+  height: 100%;
+  align-items: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  gap: 1.6rem;
+  height: 100%;
+}
+
+li {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: auto;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+}
+
+li a:hover {
+  color: darkslategray;
+}
