@@ -1,12 +1,12 @@
 main
-  form(method="POST")
+  form(method="POST" action="/new")
     section
       label(for="messageContent") Message:
-      input(id="messageContent" type="text" placeholder="Add your text here" required='true')
+      input(name="messageContent" id="messageContent" type="text" placeholder="Add your text here" required='true')
     section
       label(for="messageColorHex") Color:
       div.color-wrapper(style='background-color: #ffa502')
-        input(id="messageColorHex" type="color" value="#ffa502" required='true' onchange='handleColorChange(event)')
+        input(name="messageColorHex" id="messageColorHex" type="color" value="#ffa502" required='true' onchange='handleColorChange(event)')
     button(type="submit") Submit
 
   script.

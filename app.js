@@ -20,6 +20,10 @@ app.set("view engine", "pug"); // Configures express to expect pug templates for
 // Makes public folder available
 app.use(express.static(path.join(__dirname, "public")));
 
+// For populating the body in post requests
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Parse JSON requests
+
 app.get("/", async (req, res) => {
   const messages = await Messages.find();
   const compiledPugTemplate = pug.renderFile("./views/index.pug", { messages });
@@ -29,6 +33,10 @@ app.get("/", async (req, res) => {
 app.get("/new", async (req, res) => {
   const compiledPugTemplate = pug.renderFile("./views/new.pug");
   res.send(compiledPugTemplate);
+});
+
+app.post("/new", async (req, res) => {
+  console.log(req.body);
 });
 
 app.listen(process.env.PORT);
