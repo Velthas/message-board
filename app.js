@@ -7,6 +7,11 @@ mongoose.set("strictQuery", false);
 
 const { Messages } = require("./models/message");
 
+const urls = {
+  HOME: '/',
+  NEW: '/new'
+}
+
 // Mongo Setup
 const mongoDB = process.env.DATABASE_URL;
 main().catch((err) => console.log(err));
@@ -14,31 +19,30 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
-const app = express(); // Setting up express
+// Setting up express
+const app = express();
+
+// Middleware
 app.set("view engine", "pug"); // Configures express to expect pug templates for views
-
-// Makes public folder available
-app.use(express.static(path.join(__dirname, "public")));
-
-// For populating the body in post requests
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public"))); // Makes public folder available
+app.use(express.urlencoded({ extended: true })); // Populating body in post requests
 app.use(express.json()); // Parse JSON requests
 
-app.get("/", async (req, res) => {
+app.get(urls.HOME, async (req, res) => {
   const messages = await Messages.find();
   const compiledPugTemplate = pug.renderFile("./views/index.pug", { messages });
   res.send(compiledPugTemplate);
 });
 
-app.get("/new", async (req, res) => {
+app.get(urls.NEW, async (req, res) => {
   const compiledPugTemplate = pug.renderFile("./views/new.pug");
   res.send(compiledPugTemplate);
 });
 
-app.post("/new", async (req, res) => {
+app.post(urls.NEW, async (req, res) => {
   console.log(req.body);
 });
 
-app.listen(process.env.PORT);
-
+const PORT = process.env.PORT | 8000
+app.listen(PORT);
 console.log(`Server running at localhost:${process.env.PORT}`);
