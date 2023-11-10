@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Caveat";
+  src: url("/caveat.ttf") format("truetype");
+}
+
 html {
   font-size: 10px;
 }
@@ -83,6 +88,8 @@ article.message {
 
   padding: 1.6rem;
   cursor: pointer;
+
+  font-family: "Caveat";
 }
 
 article.message:hover {
@@ -94,8 +101,9 @@ article p {
   overflow: scroll;
 }
 
+/* ### Even ### */
 article.message:nth-child(even) {
-  transform: rotate(15deg);
+  transform: rotate(9deg);
 }
 
 article.message:nth-child(even)::after {
@@ -115,8 +123,9 @@ article.message:nth-child(even)::after {
   background-color: crimson;
 }
 
+/* ### Odd ### */
 article.message:nth-child(odd) {
-  transform: rotate(-9deg);
+  transform: rotate(-4deg);
 }
 
 article.message:nth-child(odd)::after {
@@ -130,7 +139,7 @@ article.message:nth-child(odd)::after {
   opacity: 0.8;
 
   height: 2.5rem;
-  aspect-ratio: 4 / 1;
+  aspect-ratio: 3 / 1;
 
   background-color: crimson;
 }
@@ -149,4 +158,32 @@ article.message:nth-child(odd)::before {
   aspect-ratio: 4 / 1;
 
   background-color: crimson;
+}
+
+/* ### 3rd ### */
+article.message:nth-child(3n + 1) {
+  transform: rotate(-9deg);
+}
+
+article.message:nth-child(3n + 1)::after,
+article.message:nth-child(3n + 1)::before {
+  position: absolute;
+  content: "";
+
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  opacity: 0.8;
+
+  height: 4.5rem;
+  aspect-ratio: 1;
+
+  background-color: crimson;
+}
+
+article.message:nth-child(3n + 1)::before {
+  height: 4rem;
 }

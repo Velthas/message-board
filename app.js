@@ -1,9 +1,9 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const pug = require("pug");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const pug = require("pug");
 
 const { Messages } = require("./models/message");
 
