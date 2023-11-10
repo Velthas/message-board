@@ -1,6 +1,18 @@
 main
   form(method="POST")
-    label(for="messageContent") 
-    input(id="messageContent" type="text" placeholder="add your text here")
-    label(for="messageColorHex")
-    input(id="messageColorHex" type="color" value="#e66465") 
+    section
+      label(for="messageContent") Message:
+      input(id="messageContent" type="text" placeholder="Add your text here" required='true')
+    section
+      label(for="messageColorHex") Color:
+      div.color-wrapper(style='background-color: #ffa502')
+        input(id="messageColorHex" type="color" value="#ffa502" required='true' onchange='handleColorChange(event)')
+    button(type="submit") Submit
+
+  script.
+    function handleColorChange(e) {
+      const targetHex = e.target.value;
+      const colorInputWrapper = document.querySelector('div.color-wrapper');
+      const submitButton = document.querySelector('form button');
+      colorInputWrapper.style.backgroundColor = targetHex;      
+    }
