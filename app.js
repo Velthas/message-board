@@ -8,9 +8,9 @@ mongoose.set("strictQuery", false);
 const { Messages } = require("./models/message");
 
 const urls = {
-  HOME: '/',
-  NEW: '/new'
-}
+  HOME: "/",
+  NEW: "/new",
+};
 
 // Mongo Setup
 const mongoDB = process.env.DATABASE_URL;
@@ -28,21 +28,20 @@ app.use(express.static(path.join(__dirname, "public"))); // Makes public folder 
 app.use(express.urlencoded({ extended: true })); // Populating body in post requests
 app.use(express.json()); // Parse JSON requests
 
+// Routing
 app.get(urls.HOME, async (req, res) => {
   const messages = await Messages.find();
-  const compiledPugTemplate = pug.renderFile("./views/index.pug", { messages });
-  res.send(compiledPugTemplate);
+  res.render("./views/index.pug", { messages });
 });
 
 app.get(urls.NEW, async (req, res) => {
-  const compiledPugTemplate = pug.renderFile("./views/new.pug");
-  res.send(compiledPugTemplate);
+  res.render("./views/new.pug");
 });
 
 app.post(urls.NEW, async (req, res) => {
   console.log(req.body);
 });
 
-const PORT = process.env.PORT | 8000
+const PORT = process.env.PORT | 8000;
 app.listen(PORT);
 console.log(`Server running at localhost:${process.env.PORT}`);
