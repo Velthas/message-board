@@ -1,7 +1,6 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
-const pug = require("pug");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
@@ -31,15 +30,22 @@ app.use(express.json()); // Parse JSON requests
 // Routing
 app.get(urls.HOME, async (req, res) => {
   const messages = await Messages.find();
-  res.render("./views/index.pug", { messages });
+  res.render("index.pug", { messages });
 });
 
 app.get(urls.NEW, async (req, res) => {
-  res.render("./views/new.pug");
+  res.render("new.pug");
 });
 
 app.post(urls.NEW, async (req, res) => {
-  console.log(req.body);
+  const { messageContent, messageColorHex } = req?.body;
+  const message = new Messages({
+    messageContent,
+    messageColorHex,
+    messageDate: new Date(),
+  });
+  await message.save();
+  res.redirect(urls.HOME);
 });
 
 const PORT = process.env.PORT | 8000;

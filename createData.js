@@ -3,6 +3,8 @@ console.log(
   'This script populates some messages into the db- e.g.: node populatedb "mongodb+srv://cooluser:coolpassword@cluster0.lz91hw2.mongodb.net/local_library?retryWrites=true&w=majority"'
 );
 
+// Your connection string would look something like mongodb://localhost:27017/DBNAME
+
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 
